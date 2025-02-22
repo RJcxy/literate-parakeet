@@ -33,7 +33,7 @@ class ConfigGUI:
 
     def create_widgets(self):
 
-        self.master.title("成绩查询系统配置")
+        self.master.title("成绩查询系统配置 v2.1 作者RJcxy")
         self.master.geometry("520x420")
 
         config_frame = ttk.LabelFrame(self.master, text="系统配置")
