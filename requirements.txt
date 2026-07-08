@@ -1,0 +1,4 @@
+Flask==3.0.0
+ddddocr==1.4.7
+openpyxl==3.1.2
+playwright==1.41.0

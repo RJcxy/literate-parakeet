@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中高考成绩批量查询系统</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header class="app-header">
+        <div class="header-container">
+            <h1 class="app-title">中高考成绩批量查询系统 <span class="version">v3.0</span></h1>
+            <div style="display: flex; gap: 15px; align-items: center;">
+                <button id="theme-toggle" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; border-radius: 4px; cursor: pointer;">🌓 切换外观</button>
+                <div id="status-badge" class="badge badge-idle">系统空闲</div>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-content">
+        <!-- 左侧配置区 -->
+        <section class="panel-left">
+            <div class="card">
+                <h2>基础配置</h2>
+                <div class="form-group">
+                    <label for="excel-path">Excel文件路径</label>
+                    <div class="input-with-btn">
+                        <input type="text" id="excel-path" placeholder="例如: ./excel/报名号.xlsx">
+                        <button id="btn-browse-excel" class="btn btn-secondary">浏览</button>
+                    </div>
+                </div>
+                
+                <div class="drag-upload-area" id="drag-area">
+                    <p>或将新的 Excel 文件拖拽到此处上传</p>
+                    <input type="file" id="file-uploader" accept=".xlsx" style="display: none;">
+                </div>
+
+                <div class="form-group">
+                    <label for="target-url">查询网址</label>
+                    <input type="text" id="target-url" placeholder="请在此输入中高考查分网址">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="start-row">起始行</label>
+                        <input type="number" id="start-row" value="2" min="2">
+                    </div>
+                    <div class="form-group">
+                        <label for="max-row">结束行</label>
+                        <input type="number" id="max-row" value="271" min="2">
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>行列与提取配置</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="col-name">姓名列</label>
+                        <input type="number" id="col-name" value="2" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="col-exam-id">准考证/报名号列</label>
+                        <input type="number" id="col-exam-id" value="3" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="col-password">密码列</label>
+                        <input type="number" id="col-password" value="5" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="col-score">成绩起始写入列</label>
+                        <input type="number" id="col-score" value="6" min="1">
+                    </div>
+                </div>
+
+                <div class="form-row" style="margin-top: 15px;">
+                    <div class="form-group" style="flex: 2;">
+                        <label for="extract-mode">提取方式</label>
+                        <select id="extract-mode">
+                            <option value="自动智能匹配">自动智能匹配</option>
+                            <option value="行号切片范围">行号切片范围 (原版方式)</option>
+                            <option value="自定义 CSS 选择器">自定义 CSS 选择器</option>
+                        </select>
+                    </div>
+                    <div class="form-group" style="flex: 1;">
+                        <label for="extract-param">匹配参数</label>
+                        <input type="text" id="extract-param" value="无参数" disabled>
+                    </div>
+                </div>
+
+                <div class="checkbox-group" style="margin-top: 15px;">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-overwrite">
+                        <span class="checkmark"></span>
+                        覆盖已有成绩
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-show-browser" checked>
+                        <span class="checkmark"></span>
+                        显示浏览器界面
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="chk-export-new">
+                        <span class="checkmark"></span>
+                        导出到新文件
+                    </label>
+                </div>
+
+                <div class="form-group" id="export-path-group" style="display: none; margin-top: 10px;">
+                    <label for="export-path">新文件导出路径</label>
+                    <div class="input-with-btn">
+                        <input type="text" id="export-path" placeholder="例如: ./excel/导出成绩.xlsx">
+                        <button id="btn-browse-export" class="btn btn-secondary">选择</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 折叠栏：高级自适应配置 -->
+            <details class="card details-accordion">
+                <summary>高级自适应定位器配置 (适用于草台班子网站)</summary>
+                <div class="accordion-content">
+                    <div class="form-group">
+                        <label for="sel-exam-id">准考证号输入框 CSS 选择器</label>
+                        <input type="text" id="sel-exam-id" value='input[name="BMH"], input[name="bmh"], input[name="ZKZH"], input[name="zkzh"], #BMH, #ZKZH'>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel-password">密码输入框 CSS 选择器</label>
+                        <input type="text" id="sel-password" value='input[type="password"], #MM, #mm, input[name="MM"], input[name="mm"]'>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel-captcha-input">验证码输入框 CSS 选择器</label>
+                        <input type="text" id="sel-captcha-input" value='input[name="verifyCode"], input[name="verifycode"], input[name="yzm"], #verifyCode'>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel-captcha-img">验证码图片 CSS 选择器</label>
+                        <input type="text" id="sel-captcha-img" value='img#verify, #verify, img[src*="verify"], img[src*="code"]'>
+                    </div>
+                    <div class="form-group">
+                        <label for="sel-query-btn">查询提交按钮 CSS 选择器</label>
+                        <input type="text" id="sel-query-btn" value='a:has-text("查询"), button:has-text("查询"), input[type="submit"], #queryBtn'>
+                    </div>
+                </div>
+            </details>
+
+            <div class="action-buttons">
+                <button id="btn-start" class="btn btn-primary">开始运行</button>
+                <button id="btn-stop" class="btn btn-danger" disabled>停止运行</button>
+            </div>
+        </section>
+
+        <!-- 右侧进度与预览区 -->
+        <section class="panel-right">
+            <div class="card table-card">
+                <div class="table-header">
+                    <h2>考生成绩导入状态预览</h2>
+                    <span id="preview-row-count" class="row-count">加载中...</span>
+                </div>
+                <div class="table-container">
+                    <table id="preview-table">
+                        <thead>
+                            <tr>
+                                <th style="width: 60px;">行号</th>
+                                <th style="width: 90px;">姓名</th>
+                                <th style="width: 130px;">准考证/报名号</th>
+                                <th style="width: 100px;">密码</th>
+                                <th style="width: 100px;">查询状态</th>
+                                <th>解析成绩</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td colspan="6" class="text-center text-muted">请先指定并加载 Excel 文件数据</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 控制台日志 -->
+            <div class="card console-card">
+                <h2>系统实时日志监视</h2>
+                <div class="console-box" id="console-box">
+                    <div class="console-line text-muted">等待查分系统启动...</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="/static/app.js"></script>
+</body>
+</html>

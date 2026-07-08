@@ -1,0 +1,26 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Runtime and cache
+/html/
+/selected_html/
+/scores/
+/verify/
+/logs/
+
+# Do not track excel generated files, but keep the folder
+/excel/*
+!/excel/报名号.xlsx
+
+# Virtual environments
+venv/
+env/
+.env

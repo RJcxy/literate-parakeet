@@ -1,0 +1,602 @@
+/* Google Fonts - Outfit / Inter style System Fonts */
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.5;
+}
+
+/* 布局网格 */
+.app-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 15px 24px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+}
+
+.header-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #0f172a;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.app-title .version {
+    font-size: 0.75rem;
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 500;
+}
+
+/* 内容布局 */
+.app-content {
+    max-width: 1400px;
+    margin: 20px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+@media (max-width: 1024px) {
+    .app-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 卡片容器 */
+.card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+}
+
+.card h2 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #0f172a;
+    border-left: 3px solid #4f46e5;
+    padding-left: 8px;
+}
+
+/* 表单组件 */
+.form-group {
+    margin-bottom: 12px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group select {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    background-color: #fff;
+    color: #1e293b;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.form-group input:disabled {
+    background-color: #f1f5f9;
+    color: #94a3b8;
+    cursor: not-allowed;
+}
+
+/* 输入框+右侧按钮组合 */
+.input-with-btn {
+    display: flex;
+    gap: 8px;
+}
+
+.input-with-btn input {
+    flex: 1;
+}
+
+/* 表单栅格与行 */
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+/* 按钮样式 */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    white-space: nowrap;
+}
+
+.btn-primary {
+    background-color: #4f46e5;
+    color: #ffffff;
+}
+
+.btn-primary:hover:not(:disabled) {
+    background-color: #4338ca;
+}
+
+.btn-secondary {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background-color: #f8fafc;
+    border-color: #94a3b8;
+}
+
+.btn-danger {
+    background-color: #ef4444;
+    color: #ffffff;
+}
+
+.btn-danger:hover:not(:disabled) {
+    background-color: #dc2626;
+}
+
+.btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* 拖拽上传区 */
+.drag-upload-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    background-color: #f8fafc;
+    color: #64748b;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: all 0.15s ease-in-out;
+}
+
+.drag-upload-area:hover,
+.drag-upload-area.dragover {
+    border-color: #6366f1;
+    background-color: rgba(99, 102, 241, 0.02);
+    color: #4f46e5;
+}
+
+/* 自定义复选框 */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #475569;
+    user-select: none;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    height: 18px;
+    width: 18px;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    transition: all 0.15s;
+}
+
+.checkbox-container:hover input ~ .checkmark {
+    border-color: #94a3b8;
+}
+
+.checkbox-container input:checked ~ .checkmark {
+    background-color: #4f46e5;
+    border-color: #4f46e5;
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 4px;
+    height: 9px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* 折叠手风琴 */
+.details-accordion summary {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    outline: none;
+    user-select: none;
+}
+
+.accordion-content {
+    margin-top: 15px;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+}
+
+/* 操作按钮 */
+.action-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.action-buttons .btn {
+    flex: 1;
+    padding: 12px;
+    font-size: 1rem;
+}
+
+/* 状态徽章 */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.badge-idle {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.badge-running {
+    background-color: #fef3c7;
+    color: #92400e;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.badge-stopped {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.6; }
+}
+
+/* 成绩表格区域 */
+.table-card {
+    padding: 0;
+    overflow: hidden;
+}
+
+.table-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 20px 10px 20px;
+}
+
+.table-header h2 {
+    margin: 0;
+}
+
+.row-count {
+    font-size: 0.8rem;
+    background-color: #f1f5f9;
+    color: #64748b;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 500;
+}
+
+.table-container {
+    max-height: 400px;
+    overflow-y: auto;
+    border-top: 1px solid #e2e8f0;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.85rem;
+    text-align: left;
+}
+
+th {
+    background-color: #f8fafc;
+    color: #475569;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #f1f5f9;
+    color: #334155;
+    word-break: break-all;
+}
+
+tr:hover td {
+    background-color: #f8fafc;
+}
+
+/* 表格内状态标识 */
+.status-indicator {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.75rem;
+}
+
+.status-pending { background-color: #f3f4f6; color: #4b5563; }
+.status-running { background-color: #fef3c7; color: #b45309; }
+.status-success { background-color: #d1fae5; color: #065f46; }
+.status-error { background-color: #fee2e2; color: #b91c1c; }
+.status-skipped { background-color: #e5e7eb; color: #6b7280; }
+
+.score-badge {
+    display: inline-block;
+    background-color: #eff6ff;
+    color: #1d4ed8;
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 4px;
+    margin-bottom: 4px;
+    font-family: Consolas, monospace;
+    font-weight: 600;
+    font-size: 0.8rem;
+}
+
+.text-center { text-align: center; }
+.text-muted { color: #94a3b8; }
+
+/* 命令行终端日志框 */
+.console-card {
+    background-color: #fafafa;
+    border-color: #e5e5e5;
+}
+
+.console-card h2 {
+    border-left-color: #64748b;
+}
+
+.console-box {
+    background-color: #1e1e1e;
+    color: #e0e0e0;
+    border-radius: 6px;
+    padding: 12px;
+    height: 160px;
+    overflow-y: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.console-line {
+    margin-bottom: 4px;
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.console-line.text-error { color: #f87171; }
+.console-line.text-warn { color: #fbbf24; }
+.console-line.text-success { color: #34d399; }
+
+/* =========================================
+   Dark Mode Styles (克制、低饱和度)
+   ========================================= */
+body.dark-mode {
+    background-color: #121212;
+    color: #e2e8f0;
+}
+
+body.dark-mode .app-header {
+    background-color: #1e1e1e;
+    border-bottom-color: #333;
+}
+
+body.dark-mode .app-title {
+    color: #e2e8f0;
+}
+
+body.dark-mode .app-title .version {
+    background-color: #333;
+    color: #94a3b8;
+}
+
+body.dark-mode .card {
+    background: #1e1e1e;
+    border-color: #333;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .card h2 {
+    color: #e2e8f0;
+    border-left-color: #6366f1;
+}
+
+body.dark-mode .form-group label {
+    color: #cbd5e1;
+}
+
+body.dark-mode .form-group input[type="text"],
+body.dark-mode .form-group input[type="number"],
+body.dark-mode .form-group select {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #e2e8f0;
+}
+
+body.dark-mode .form-group input:disabled {
+    background-color: #1a1a1a;
+    color: #64748b;
+}
+
+body.dark-mode .btn-secondary {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #cbd5e1;
+}
+
+body.dark-mode .btn-secondary:hover:not(:disabled) {
+    background-color: #333;
+    border-color: #555;
+}
+
+body.dark-mode .drag-upload-area {
+    background-color: #1a1a1a;
+    border-color: #444;
+    color: #94a3b8;
+}
+
+body.dark-mode .drag-upload-area:hover {
+    background-color: #2a2a2a;
+    border-color: #6366f1;
+}
+
+body.dark-mode .checkbox-container {
+    color: #cbd5e1;
+}
+
+body.dark-mode .checkmark {
+    background-color: #2a2a2a;
+    border-color: #444;
+}
+
+body.dark-mode .details-accordion summary {
+    color: #cbd5e1;
+}
+
+body.dark-mode .accordion-content {
+    border-top-color: #333;
+}
+
+body.dark-mode .badge-idle {
+    background-color: #333;
+    color: #cbd5e1;
+}
+
+body.dark-mode .row-count {
+    background-color: #333;
+    color: #94a3b8;
+}
+
+body.dark-mode .table-container {
+    border-top-color: #333;
+}
+
+body.dark-mode th {
+    background-color: #2a2a2a;
+    color: #cbd5e1;
+    border-bottom-color: #444;
+}
+
+body.dark-mode td {
+    border-bottom-color: #333;
+    color: #e2e8f0;
+}
+
+body.dark-mode tr:hover td {
+    background-color: #2a2a2a;
+}
+
+body.dark-mode .status-pending { background-color: #333; color: #cbd5e1; }
+body.dark-mode .status-skipped { background-color: #333; color: #94a3b8; }
+
+body.dark-mode .score-badge {
+    background-color: #1e3a8a;
+    color: #bfdbfe;
+}
+
+body.dark-mode .console-card {
+    background-color: #1a1a1a;
+    border-color: #333;
+}
+
+body.dark-mode .console-box {
+    background-color: #000;
+}
